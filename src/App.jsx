@@ -15,56 +15,72 @@ import PersistLogin from "./features/auth/PersistLogin";
 import RequireAuth from "./features/auth/RequireAuth";
 import { ROLES } from "./config/roles";
 import useTitle from "./hooks/useTitle";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { useSelector } from "react-redux";
 
 function App() {
   // Custom hook to set the page title
   useTitle("Meganote");
 
+  // Get the theme from the global state
+  const { theme } = useSelector(state => state.theme);
+
+  // Create the theme
+  const appTheme = createTheme({
+    palette: {
+      mode: theme,
+    },
+  });
+
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        {/* Public routes */}
-        <Route index element={<Public />} />
-        <Route path="login" element={<Login />} />
+    <ThemeProvider theme={appTheme}>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          {/* Public routes */}
+          <Route index element={<Public />} />
+          <Route path="login" element={<Login />} />
 
-        {/* Protected Routes */}
-        <Route element={<PersistLogin />}>
-          {/* All roles (logged in users) are allowed to access the wrapped routes */}
-          <Route
-            element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}
-          >
-            {/* If someone is not authorized, we're not going to prefetch the data, so we wrap 'RequireAuth' around 'Prefect' */}
-            <Route element={<Prefetch />}>
-              {/* Dash */}
-              <Route path="dash" element={<DashLayout />}>
-                <Route index element={<Welcome />} />
+          {/* Protected Routes */}
+          <Route element={<PersistLogin />}>
+            {/* All roles (logged in users) are allowed to access the wrapped routes */}
+            <Route
+              element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}
+            >
+              {/* If someone is not authorized, we're not going to prefetch the data, so we wrap 'RequireAuth' around 'Prefect' */}
+              <Route element={<Prefetch />}>
+                {/* Dash */}
+                <Route path="dash" element={<DashLayout />}>
+                  <Route index element={<Welcome />} />
 
-                {/* Only managers and admins are allowed to access the users route */}
-                <Route
-                  element={
-                    <RequireAuth allowedRoles={[ROLES.Manager, ROLES.Admin]} />
-                  }
-                >
-                  <Route path="users">
-                    <Route index element={<UsersList />} />
-                    <Route path=":id" element={<EditUser />} />
-                    <Route path="new" element={<NewUserForm />} />
+                  {/* Only managers and admins are allowed to access the users route */}
+                  <Route
+                    element={
+                      <RequireAuth
+                        allowedRoles={[ROLES.Manager, ROLES.Admin]}
+                      />
+                    }
+                  >
+                    <Route path="users">
+                      <Route index element={<UsersList />} />
+                      <Route path=":id" element={<EditUser />} />
+                      <Route path="new" element={<NewUserForm />} />
+                    </Route>
+                  </Route>
+
+                  <Route path="notes">
+                    <Route index element={<NotesList />} />
+                    <Route path=":id" element={<EditNote />} />
+                    <Route path="new" element={<NewNote />} />
                   </Route>
                 </Route>
-
-                <Route path="notes">
-                  <Route index element={<NotesList />} />
-                  <Route path=":id" element={<EditNote />} />
-                  <Route path="new" element={<NewNote />} />
-                </Route>
+                {/* End Dash */}
               </Route>
-              {/* End Dash */}
             </Route>
           </Route>
+          {/* End Protected Routes */}
         </Route>
-        {/* End Protected Routes */}
-      </Route>
-    </Routes>
+      </Routes>
+    </ThemeProvider>
   );
 }
 
