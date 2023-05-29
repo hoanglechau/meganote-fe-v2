@@ -2,19 +2,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
-import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
-import { Switch } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { IconButton } from "@mui/material";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { toggleTheme } from "../features/theme/themeSlice";
+import { Paper } from "@mui/material";
 
 const DashFooter = () => {
-  // Theme switch
-  const theme = useSelector(state => state.theme);
+  // Theme switching
   const dispatch = useDispatch();
-  const [isDarkTheme, setIsDarkTheme] = useState(theme === "dark");
 
   const handleChangeTheme = () => {
-    setIsDarkTheme(!isDarkTheme);
     dispatch(toggleTheme());
   };
 
@@ -42,16 +40,14 @@ const DashFooter = () => {
 
   // Content to be rendered
   const content = (
-    <footer className="dash-footer">
+    <Paper component="footer" className="dash-footer">
       {goHomeButton}
       <p>Current User: {username}</p>
       <p>Status: {status}</p>
-      <Switch
-        checked={isDarkTheme}
-        onChange={handleChangeTheme}
-        inputProps={{ "aria-label": "controlled" }}
-      />
-    </footer>
+      <IconButton onClick={handleChangeTheme}>
+        <DarkModeIcon />
+      </IconButton>
+    </Paper>
   );
 
   return content;
