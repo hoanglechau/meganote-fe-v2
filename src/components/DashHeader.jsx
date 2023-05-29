@@ -11,6 +11,7 @@ import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useSendLogoutMutation } from "../features/auth/authApiSlice";
 import useAuth from "../hooks/useAuth";
 import PulseLoader from "react-spinners/PulseLoader";
+import { Paper } from "@mui/material";
 
 // Use these regex patterns to compare the location to the URL to verify which location we're on or not on -> use this to decide whether we want to display specific buttons in the header or not
 const DASH_REGEX = /^\/dash(\/)?$/;
@@ -131,7 +132,7 @@ const DashHeader = () => {
   // Content to be rendered
   // Put the error message just above the header so that it will be rendered on top of the header, not inside the header
   const content = (
-    <>
+    <Paper>
       <p className={errClass}>{error?.data?.message}</p>
 
       <header className="dash-header">
@@ -142,7 +143,7 @@ const DashHeader = () => {
           <nav className="dash-header__nav">{buttonContent}</nav>
         </div>
       </header>
-    </>
+    </Paper>
   );
 
   return content;
