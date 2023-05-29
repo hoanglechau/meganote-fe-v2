@@ -29,6 +29,29 @@ function App() {
   const appTheme = createTheme({
     palette: {
       mode: theme,
+      primary: {
+        main: "#C13258",
+        light: "#E16595",
+        dark: "#9A264B",
+      },
+      secondary: {
+        main: "#42A5F5",
+        light: "#65C1FF",
+        dark: "#2894E6",
+      },
+      background: {
+        default: "#ffffff",
+        light: "#F7FAFC",
+        dark: "#212121",
+      },
+      text: {
+        light: "#616161",
+        dark: "#FFFFFF",
+      },
+    },
+    typography: {
+      fontFamily: "Roboto",
+      fontSize: 16,
     },
   });
 
