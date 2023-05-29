@@ -6,6 +6,7 @@ import { useLoginMutation } from "./authApiSlice";
 import usePersist from "../../hooks/usePersist";
 import useTitle from "../../hooks/useTitle";
 import PulseLoader from "react-spinners/PulseLoader";
+import { Paper, Box, Typography, Button } from "@mui/material";
 
 const Login = () => {
   // Custom hook to set the page title
@@ -87,14 +88,14 @@ const Login = () => {
 
   // Content to be rendered
   const content = (
-    <section className="public">
-      <header>
-        <h1>Employee Login</h1>
-      </header>
-      <main className="login">
-        <p ref={errRef} className={errClass} aria-live="assertive">
+    <Paper component="section" className="public">
+      <Box component="header">
+        <Typography variant="h3">User Login</Typography>
+      </Box>
+      <Box component="main" className="login">
+        <Typography ref={errRef} className={errClass} aria-live="assertive">
           {errMsg}
-        </p>
+        </Typography>
 
         <form className="form" onSubmit={handleSubmit}>
           <label htmlFor="username">Username:</label>
@@ -131,11 +132,13 @@ const Login = () => {
             Stay Signed In
           </label>
         </form>
-      </main>
-      <footer>
-        <Link to="/">Back to Home</Link>
-      </footer>
-    </section>
+      </Box>
+      <Box component="footer">
+        <Button variant="outlined">
+          <Link to="/">Back to Home</Link>
+        </Button>
+      </Box>
+    </Paper>
   );
 
   return content;
