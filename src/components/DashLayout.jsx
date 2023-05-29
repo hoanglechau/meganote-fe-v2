@@ -1,16 +1,15 @@
 import { Outlet } from "react-router-dom";
 import DashHeader from "./DashHeader";
 import DashFooter from "./DashFooter";
-import Card from "./Card";
+import { Paper } from "@mui/material";
 
 const DashLayout = () => {
   return (
     <>
       <DashHeader />
-      <div className="dash-container">
+      <Paper className="dash-container">
         <Outlet />
-      </div>
-      <Card />
+      </Paper>
       <DashFooter />
     </>
   );
