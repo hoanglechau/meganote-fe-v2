@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useTitle from "../../hooks/useTitle";
+import { Box, Typography } from "@mui/material";
+import ColorLink from "../../components/ColorLink";
 
 const Welcome = () => {
   // Get the username and status from the useAuth custom hook
@@ -18,31 +19,27 @@ const Welcome = () => {
   // Content to be rendered
   // Only show the "View User Settings" and "Add New User" links if the user is a manager or admin
   const content = (
-    <section className="welcome">
-      <p>{today}</p>
+    <Box component="section" className="welcome">
+      <Typography variant="h6" color="text">
+        {today}
+      </Typography>
 
-      <h1>Welcome {username}!</h1>
+      <Typography variant="h3" color="primary">
+        Welcome {username}!
+      </Typography>
 
-      <p>
-        <Link to="/dash/notes">View Notes</Link>
-      </p>
+      <ColorLink to="/dash/notes">View Notes</ColorLink>
 
-      <p>
-        <Link to="/dash/notes/new">Add New Note</Link>
-      </p>
+      <ColorLink to="/dash/notes/new">Add New Note</ColorLink>
 
       {(isManager || isAdmin) && (
-        <p>
-          <Link to="/dash/users">View User Settings</Link>
-        </p>
+        <ColorLink to="/dash/users">View User Settings</ColorLink>
       )}
 
       {(isManager || isAdmin) && (
-        <p>
-          <Link to="/dash/users/new">Add New User</Link>
-        </p>
+        <ColorLink to="/dash/users/new">Add New User</ColorLink>
       )}
-    </section>
+    </Box>
   );
 
   return content;
