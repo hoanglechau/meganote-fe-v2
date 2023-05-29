@@ -2,8 +2,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
+import { Switch } from "@mui/material";
+import { toggleTheme } from "../features/theme/themeSlice";
 
 const DashFooter = () => {
+  // Theme switch
+  const theme = useSelector(state => state.theme);
+  const dispatch = useDispatch();
+  const [isDarkTheme, setIsDarkTheme] = useState(theme === "dark");
+
+  const handleChangeTheme = () => {
+    setIsDarkTheme(!isDarkTheme);
+    dispatch(toggleTheme());
+  };
+
   // Get the username and status from the useAuth custom hook
   const { username, status } = useAuth();
 
@@ -32,6 +46,11 @@ const DashFooter = () => {
       {goHomeButton}
       <p>Current User: {username}</p>
       <p>Status: {status}</p>
+      <Switch
+        checked={isDarkTheme}
+        onChange={handleChangeTheme}
+        inputProps={{ "aria-label": "controlled" }}
+      />
     </footer>
   );
 
