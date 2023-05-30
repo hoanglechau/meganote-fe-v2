@@ -1,12 +1,13 @@
 import { useRef, useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "./authSlice";
 import { useLoginMutation } from "./authApiSlice";
 import usePersist from "../../hooks/usePersist";
 import useTitle from "../../hooks/useTitle";
 import PulseLoader from "react-spinners/PulseLoader";
-import { Paper, Box, Typography, Button } from "@mui/material";
+import { Paper, Box, Typography, Divider } from "@mui/material";
+import ColorLink from "../../components/ColorLink";
 
 const Login = () => {
   // Custom hook to set the page title
@@ -90,8 +91,11 @@ const Login = () => {
   const content = (
     <Paper component="section" className="public">
       <Box component="header">
-        <Typography variant="h3">User Login</Typography>
+        <Typography variant="h3" color="primary">
+          User Login
+        </Typography>
       </Box>
+      <Divider />
       <Box component="main" className="login">
         <Typography ref={errRef} className={errClass} aria-live="assertive">
           {errMsg}
@@ -133,10 +137,11 @@ const Login = () => {
           </label>
         </form>
       </Box>
+      <Divider />
       <Box component="footer">
-        <Button variant="outlined">
-          <Link to="/">Back to Home</Link>
-        </Button>
+        <ColorLink variant="h5" to="/">
+          Back to Home
+        </ColorLink>
       </Box>
     </Paper>
   );
