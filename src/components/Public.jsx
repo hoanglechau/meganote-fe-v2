@@ -1,26 +1,28 @@
-import { Link } from "react-router-dom";
-import { Paper, Box, Typography, Button } from "@mui/material";
+import { Paper, Box, Typography, Divider } from "@mui/material";
+import ColorLink from "./ColorLink";
 
 const Public = () => {
   const content = (
     <Paper component="section" className="public">
       <Box component="header">
-        <Typography variant="h2">
+        <Typography variant="h2" color="primary">
           Welcome to{" "}
           <Box component="span" className="nowrap">
             Meganote!
           </Box>
         </Typography>
       </Box>
+      <Divider />
       <Box component="main" className="public__main">
-        <Typography variant="h5">
+        <Typography variant="h5" color="text">
           The ultimate note taking experience!
         </Typography>
       </Box>
+      <Divider />
       <Box component="footer">
-        <Button variant="outlined">
-          <Link to="/login">User Login</Link>
-        </Button>
+        <ColorLink variant="h5" to="/login">
+          User Login
+        </ColorLink>
       </Box>
     </Paper>
   );
