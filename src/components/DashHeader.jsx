@@ -9,7 +9,7 @@ import ColorLink from "../components/ColorLink";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
-import EditNoteIcon from "@mui/icons-material/EditNote";
+import DescriptionIcon from "@mui/icons-material/Description";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Paper, Typography, Box, IconButton } from "@mui/material";
@@ -112,7 +112,7 @@ const DashHeader = () => {
         title="Notes"
         onClick={onNotesClicked}
       >
-        <EditNoteIcon />
+        <DescriptionIcon />
       </IconButton>
     );
   }
@@ -161,7 +161,7 @@ const DashHeader = () => {
       <Box component="header" className="dash-header">
         <Box className={`dash-header__container ${dashClass}`}>
           <ColorLink
-            variant="h2"
+            variant="h3"
             to="/dash"
             className="dash-header__title"
             component={Link}
