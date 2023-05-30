@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Aladin&display=swap");
 
 * {
   margin: 0;
@@ -6,12 +6,10 @@
   box-sizing: border-box;
 }
 
-/* || VARIABLES */
+/* VARIABLES */
 
 :root {
   /* COLORS */
-  --BGCOLOR: #0f172a;
-  --BORDER-COLOR: #fff;
   --COLOR: #fff;
   --ERROR: firebrick;
   --INACTIVE: lightgray;
@@ -25,7 +23,7 @@
   --INPUT-INVALID: #f00;
 }
 
-/* || UTILITY CLASSES */
+/* UTILITY CLASSES */
 .errmsg {
   display: inline-block;
   background-color: var(--TABLE-BGCOLOR);
@@ -63,12 +61,11 @@
   visibility: hidden;
 }
 
-/* || GENERAL STYLES */
+/* GENERAL STYLES */
 
 body {
-  font-family: "Noto Sans", sans-serif;
+  font-family: Aladin, sans-serif;
   min-height: 100vh;
-  /* background-color: var(--BGCOLOR); */
   color: var(--COLOR);
   background-size: cover;
   background-position: top right;
@@ -102,7 +99,7 @@ a:focus-visible {
   color: var(--LINK-HOVER);
 }
 
-/* || PAGES */
+/* PAGES */
 
 .public,
 .welcome {
@@ -119,8 +116,6 @@ a:focus-visible {
 .public__main,
 .login {
   flex-grow: 1;
-  border-top: 2px solid var(--BORDER-COLOR);
-  border-bottom: 2px solid var(--BORDER-COLOR);
   padding: 1em 0;
 }
 
@@ -132,15 +127,13 @@ a:focus-visible {
   content: "➜ ";
 }
 
-/* || DASH HEADER, CONTAINER & FOOTER */
+/* DASH HEADER, CONTAINER & FOOTER */
 
 .dash-header {
   position: sticky;
   top: 0;
   z-index: 1;
-  /* background-color: var(--BGCOLOR); */
   padding: 0 0.5em;
-  border-bottom: 1px solid var(--BORDER-COLOR);
 }
 
 .dash-header__container {
@@ -171,9 +164,7 @@ a:focus-visible {
   position: sticky;
   bottom: 0;
   z-index: 1;
-  /* background-color: var(--BGCOLOR); */
   padding: 0.5em;
-  border-top: 1px solid var(--BORDER-COLOR);
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
@@ -186,7 +177,7 @@ a:focus-visible {
   height: auto;
 }
 
-/* || TABLES - GENERAL */
+/* TABLES - GENERAL */
 
 thead,
 tbody,
@@ -232,7 +223,7 @@ tr {
   background-color: var(--INACTIVE);
 }
 
-/* ||  NOTE */
+/* NOTE */
 
 .note__created,
 .note__updated,
@@ -252,7 +243,7 @@ tr {
   color: var(--STATUS-COMPLETE);
 }
 
-/* || FORM - GENERAL */
+/* FORM - GENERAL */
 
 .form {
   display: flex;
@@ -326,6 +317,8 @@ tr {
   flex-flow: column nowrap;
   gap: 0.5em;
 }
+
+/* MEDIA QUERIES */
 
 @media screen and (max-width: 400px) {
   h1 {
