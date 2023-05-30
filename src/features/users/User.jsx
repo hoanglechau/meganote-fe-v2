@@ -1,9 +1,8 @@
-// Use FontAwesome to create icons
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { useGetUsersQuery } from "./usersApiSlice";
 import { memo } from "react";
+import { IconButton } from "@mui/material";
+import EditNoteIcon from "@mui/icons-material/EditNote";
 
 const User = ({ userId }) => {
   const { user } = useGetUsersQuery("usersList", {
@@ -31,9 +30,13 @@ const User = ({ userId }) => {
         <td className={`table__cell ${cellStatus}`}>{user.username}</td>
         <td className={`table__cell ${cellStatus}`}>{userRolesString}</td>
         <td className={`table__cell ${cellStatus}`}>
-          <button className="icon-button table__button" onClick={handleEdit}>
-            <FontAwesomeIcon icon={faPenToSquare} />
-          </button>
+          <IconButton
+            className="icon-button table__button"
+            onClick={handleEdit}
+            color="primary"
+          >
+            <EditNoteIcon />
+          </IconButton>
         </td>
       </tr>
     );
