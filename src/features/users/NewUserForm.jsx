@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useAddNewUserMutation } from "./usersApiSlice";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSave } from "@fortawesome/free-solid-svg-icons";
 import { ROLES } from "../../config/roles";
 import useTitle from "../../hooks/useTitle";
+import SaveIcon from "@mui/icons-material/Save";
+import { IconButton, Typography, Box } from "@mui/material";
 
 // Regex patterns for username and password
 const USER_REGEX = /^[A-z]{3,20}$/;
@@ -96,17 +96,24 @@ const NewUserForm = () => {
   // Content to be rendered
   const content = (
     <>
-      <p className={errClass}>{error?.data?.message}</p>
+      <Typography className={errClass}>{error?.data?.message}</Typography>
 
-      <form className="form" onSubmit={onSaveUserClicked}>
-        <div className="form__title-row">
-          <h2>New User</h2>
-          <div className="form__action-buttons">
-            <button className="icon-button" title="Save" disabled={!canSave}>
-              <FontAwesomeIcon icon={faSave} />
-            </button>
-          </div>
-        </div>
+      <form className="form">
+        <Box className="form__title-row">
+          <Typography variant="h4" color="primary">
+            New User
+          </Typography>
+          <Box className="form__action-buttons">
+            <IconButton
+              className="icon-button"
+              title="Save"
+              disabled={!canSave}
+              onClick={onSaveUserClicked}
+            >
+              <SaveIcon />
+            </IconButton>
+          </Box>
+        </Box>
         <label className="form__label" htmlFor="username">
           Username: <span className="nowrap">[3-20 letters]</span>
         </label>
