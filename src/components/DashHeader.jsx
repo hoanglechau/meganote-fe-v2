@@ -1,17 +1,18 @@
 import { useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFileCirclePlus,
-  faFilePen,
-  faUserGear,
-  faUserPlus,
-  faRightFromBracket,
-} from "@fortawesome/free-solid-svg-icons";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useSendLogoutMutation } from "../features/auth/authApiSlice";
 import useAuth from "../hooks/useAuth";
+import { useDispatch } from "react-redux";
+import { toggleTheme } from "../features/theme/themeSlice";
 import PulseLoader from "react-spinners/PulseLoader";
-import { Paper } from "@mui/material";
+import ColorLink from "../components/ColorLink";
+import NoteAddIcon from "@mui/icons-material/NoteAdd";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
+import EditNoteIcon from "@mui/icons-material/EditNote";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { Paper, Typography, Box, IconButton } from "@mui/material";
 
 // Use these regex patterns to compare the location to the URL to verify which location we're on or not on -> use this to decide whether we want to display specific buttons in the header or not
 const DASH_REGEX = /^\/dash(\/)?$/;
@@ -24,6 +25,7 @@ const DashHeader = () => {
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
 
   // Get the 'sendLogout' function and its statuses from the RTK Query custom hook
   const [sendLogout, { isLoading, isSuccess, isError, error }] =
@@ -41,6 +43,11 @@ const DashHeader = () => {
   const onNotesClicked = () => navigate("/dash/notes");
   const onUsersClicked = () => navigate("/dash/users");
 
+  // Theme switching
+  const handleChangeTheme = () => {
+    dispatch(toggleTheme());
+  };
+
   let dashClass = null;
   if (
     // Making sure that we're not on the dash, notelist or userlist pages
@@ -56,13 +63,13 @@ const DashHeader = () => {
   // Use regex patterns to check the pathname. If the pathname matches a pattern, we'll render that button
   if (NOTES_REGEX.test(pathname)) {
     newNoteButton = (
-      <button
+      <IconButton
         className="icon-button"
         title="New Note"
         onClick={onNewNoteClicked}
       >
-        <FontAwesomeIcon icon={faFileCirclePlus} />
-      </button>
+        <NoteAddIcon />
+      </IconButton>
     );
   }
 
@@ -70,13 +77,13 @@ const DashHeader = () => {
   let newUserButton = null;
   if (USERS_REGEX.test(pathname)) {
     newUserButton = (
-      <button
+      <IconButton
         className="icon-button"
         title="New User"
         onClick={onNewUserClicked}
       >
-        <FontAwesomeIcon icon={faUserPlus} />
-      </button>
+        <PersonAddIcon />
+      </IconButton>
     );
   }
 
@@ -86,9 +93,13 @@ const DashHeader = () => {
     // We're making sure that we're not on the User List and the pathname includes 'dash' -> We don't want to provide the 'User' button to go to the same page that we're on. We also want to make sure that we're on the protected pages with 'dash'
     if (!USERS_REGEX.test(pathname) && pathname.includes("/dash")) {
       userButton = (
-        <button className="icon-button" title="Users" onClick={onUsersClicked}>
-          <FontAwesomeIcon icon={faUserGear} />
-        </button>
+        <IconButton
+          className="icon-button"
+          title="Users"
+          onClick={onUsersClicked}
+        >
+          <SupervisedUserCircleIcon />
+        </IconButton>
       );
     }
   }
@@ -96,17 +107,28 @@ const DashHeader = () => {
   let notesButton = null;
   if (!NOTES_REGEX.test(pathname) && pathname.includes("/dash")) {
     notesButton = (
-      <button className="icon-button" title="Notes" onClick={onNotesClicked}>
-        <FontAwesomeIcon icon={faFilePen} />
-      </button>
+      <IconButton
+        className="icon-button"
+        title="Notes"
+        onClick={onNotesClicked}
+      >
+        <EditNoteIcon />
+      </IconButton>
     );
   }
 
   // Create the logout button
   const logoutButton = (
-    <button className="icon-button" title="Logout" onClick={sendLogout}>
-      <FontAwesomeIcon icon={faRightFromBracket} />
-    </button>
+    <IconButton className="icon-button" title="Logout" onClick={sendLogout}>
+      <LogoutIcon />
+    </IconButton>
+  );
+
+  // Create the toggle theme button
+  const themeButton = (
+    <IconButton onClick={handleChangeTheme}>
+      <DarkModeIcon />
+    </IconButton>
   );
 
   // Class for error message. This is only for the 'log out' mutation as we're using its 'isError' status here
@@ -120,6 +142,7 @@ const DashHeader = () => {
   } else {
     buttonContent = (
       <>
+        {themeButton}
         {newNoteButton}
         {newUserButton}
         {notesButton}
@@ -133,16 +156,25 @@ const DashHeader = () => {
   // Put the error message just above the header so that it will be rendered on top of the header, not inside the header
   const content = (
     <Paper>
-      <p className={errClass}>{error?.data?.message}</p>
+      <Typography className={errClass}>{error?.data?.message}</Typography>
 
-      <header className="dash-header">
-        <div className={`dash-header__container ${dashClass}`}>
-          <Link to="/dash">
-            <h1 className="dash-header__title">Meganote</h1>
-          </Link>
-          <nav className="dash-header__nav">{buttonContent}</nav>
-        </div>
-      </header>
+      <Box component="header" className="dash-header">
+        <Box className={`dash-header__container ${dashClass}`}>
+          <ColorLink
+            variant="h2"
+            to="/dash"
+            className="dash-header__title"
+            component={Link}
+            color="primary"
+          >
+            Meganote
+          </ColorLink>
+
+          <Box component="nav" className="dash-header__nav">
+            {buttonContent}
+          </Box>
+        </Box>
+      </Box>
     </Paper>
   );
 
