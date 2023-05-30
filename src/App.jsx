@@ -15,8 +15,8 @@ import PersistLogin from "./features/auth/PersistLogin";
 import RequireAuth from "./features/auth/RequireAuth";
 import { ROLES } from "./config/roles";
 import useTitle from "./hooks/useTitle";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useSelector } from "react-redux";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 function App() {
   // Custom hook to set the page title
