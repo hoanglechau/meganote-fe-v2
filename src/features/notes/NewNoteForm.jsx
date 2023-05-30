@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAddNewNoteMutation } from "./notesApiSlice";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSave } from "@fortawesome/free-solid-svg-icons";
+import SaveIcon from "@mui/icons-material/Save";
+import { IconButton, Typography, Box } from "@mui/material";
 
 const NewNoteForm = ({ users }) => {
   // Get the function and the statuses after we run it from the custom hook
@@ -53,17 +53,24 @@ const NewNoteForm = ({ users }) => {
 
   const content = (
     <>
-      <p className={errClass}>{error?.data?.message}</p>
+      <Typography className={errClass}>{error?.data?.message}</Typography>
 
-      <form className="form" onSubmit={onSaveNoteClicked}>
-        <div className="form__title-row">
-          <h2>New Note</h2>
-          <div className="form__action-buttons">
-            <button className="icon-button" title="Save" disabled={!canSave}>
-              <FontAwesomeIcon icon={faSave} />
-            </button>
-          </div>
-        </div>
+      <form className="form">
+        <Box className="form__title-row">
+          <Typography variant="h4" color="primary">
+            New Note
+          </Typography>
+          <Box className="form__action-buttons">
+            <IconButton
+              className="icon-button"
+              title="Save"
+              disabled={!canSave}
+              onClick={onSaveNoteClicked}
+            >
+              <SaveIcon />
+            </IconButton>
+          </Box>
+        </Box>
         <label className="form__label" htmlFor="title">
           Title:
         </label>
