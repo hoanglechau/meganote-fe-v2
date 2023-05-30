@@ -1,21 +1,9 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
-import { useDispatch } from "react-redux";
-import { IconButton } from "@mui/material";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import { toggleTheme } from "../features/theme/themeSlice";
-import { Paper } from "@mui/material";
+import { Paper, IconButton, Typography } from "@mui/material";
+import HomeIcon from "@mui/icons-material/Home";
 
 const DashFooter = () => {
-  // Theme switching
-  const dispatch = useDispatch();
-
-  const handleChangeTheme = () => {
-    dispatch(toggleTheme());
-  };
-
   // Get the username and status from the useAuth custom hook
   const { username, status } = useAuth();
 
@@ -28,13 +16,13 @@ const DashFooter = () => {
   let goHomeButton = null;
   if (pathname !== "/dash") {
     goHomeButton = (
-      <button
+      <IconButton
         className="dash-footer__button icon-button"
         title="Home"
         onClick={onGoHomeClicked}
       >
-        <FontAwesomeIcon icon={faHouse} />
-      </button>
+        <HomeIcon />
+      </IconButton>
     );
   }
 
@@ -42,11 +30,8 @@ const DashFooter = () => {
   const content = (
     <Paper component="footer" className="dash-footer">
       {goHomeButton}
-      <p>Current User: {username}</p>
-      <p>Status: {status}</p>
-      <IconButton onClick={handleChangeTheme}>
-        <DarkModeIcon />
-      </IconButton>
+      <Typography color="secondary">Current User: {username}</Typography>
+      <Typography color="secondary">Status: {status}</Typography>
     </Paper>
   );
 
