@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { useUpdateUserMutation, useDeleteUserMutation } from "./usersApiSlice";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSave, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { ROLES } from "../../config/roles";
+import { Typography, Box, IconButton } from "@mui/material";
+import SaveIcon from "@mui/icons-material/Save";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 // Regex patterns to check validity of username and password
 const USER_REGEX = /^[A-z]{3,20}$/;
@@ -109,29 +110,31 @@ const EditUserForm = ({ user }) => {
   // Content to be rendered
   const content = (
     <>
-      <p className={errClass}>{errContent}</p>
+      <Typography className={errClass}>{errContent}</Typography>
 
       <form className="form" onSubmit={e => e.preventDefault()}>
-        <div className="form__title-row">
-          <h2>Edit User</h2>
-          <div className="form__action-buttons">
-            <button
+        <Box className="form__title-row">
+          <Typography variant="h4" color="primary">
+            Edit User
+          </Typography>
+          <Box className="form__action-buttons">
+            <IconButton
               className="icon-button"
               title="Save"
               onClick={onSaveUserClicked}
               disabled={!canSave}
             >
-              <FontAwesomeIcon icon={faSave} />
-            </button>
-            <button
+              <SaveIcon />
+            </IconButton>
+            <IconButton
               className="icon-button"
               title="Delete"
               onClick={onDeleteUserClicked}
             >
-              <FontAwesomeIcon icon={faTrashCan} />
-            </button>
-          </div>
-        </div>
+              <DeleteIcon />
+            </IconButton>
+          </Box>
+        </Box>
         <label className="form__label" htmlFor="username">
           Username: <span className="nowrap">[3-20 letters]</span>
         </label>
