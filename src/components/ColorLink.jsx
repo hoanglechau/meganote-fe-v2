@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Typography, useTheme } from "@mui/material";
 
-const ColorLink = ({ to, children }) => {
+const ColorLink = ({ variant, to, color, children }) => {
   const theme = useTheme();
 
   const linkStyle = {
@@ -14,7 +14,13 @@ const ColorLink = ({ to, children }) => {
   };
 
   return (
-    <Typography variant="h6" component={Link} to={to} style={linkStyle}>
+    <Typography
+      variant={variant}
+      color={color}
+      component={Link}
+      to={to}
+      style={linkStyle}
+    >
       {children}
     </Typography>
   );
