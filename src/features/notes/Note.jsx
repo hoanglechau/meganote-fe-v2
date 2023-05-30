@@ -1,8 +1,8 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { useGetNotesQuery } from "./notesApiSlice";
 import { memo } from "react";
+import { IconButton } from "@mui/material";
+import EditNoteIcon from "@mui/icons-material/EditNote";
 
 const Note = ({ noteId }) => {
   // Get 'note' from the data that is already queried -> This will not make a new request
@@ -48,9 +48,13 @@ const Note = ({ noteId }) => {
         <td className="table__cell note__username">{note.username}</td>
 
         <td className="table__cell">
-          <button className="icon-button table__button" onClick={handleEdit}>
-            <FontAwesomeIcon icon={faPenToSquare} />
-          </button>
+          <IconButton
+            className="icon-button table__button"
+            onClick={handleEdit}
+            color="primary"
+          >
+            <EditNoteIcon />
+          </IconButton>
         </td>
       </tr>
     );
