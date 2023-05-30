@@ -50,7 +50,7 @@ function App() {
       },
     },
     typography: {
-      fontFamily: "Roboto",
+      fontFamily: "Aladin",
       fontSize: 16,
     },
   });
