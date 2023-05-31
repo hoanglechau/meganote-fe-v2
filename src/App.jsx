@@ -61,7 +61,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           {/* Public routes */}
           <Route index element={<Public />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="login" element={<Login />} />
 
           {/* Protected Routes */}
           <Route element={<PersistLogin />}>
