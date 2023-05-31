@@ -1,3 +1,4 @@
+<a name="readme-top"></a>
 <!-- PROJECT TITLE -->
 # **Meganote - The ultimate note-taking app** 
 
@@ -12,6 +13,17 @@
         <li><a href="#user-stories">User Stories</a></li>
         <li><a href="#built-with">Built With</a></li>
       </ul>
+    </li>
+    <li>
+      <a href="#api-endpoints">API Endpoints</a>
+      <ul>
+        <li><a href="#auth-apis">Auth APIs</a></li>
+        <li><a href="#user-apis">User APIs</a></a></li>
+        <li><a href="#note-apis">Note APIs</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#entity-relationship-diagram">Entity Relationship Diagram</a>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
@@ -40,7 +52,7 @@ This app acts like the traditional sticky note board system in which users stick
 
 Challenges: Designing logical schema models for the API, implementing authentication and authorization, designing an easy-to-use user interface, making the app responsive.
 
-Features for the future: Making a mobile version of the app
+Features for the future: Making a mobile version of the app for iOS and Android.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -97,7 +109,7 @@ Features for the future: Making a mobile version of the app
 <!-- API ENDPOINTS -->
 ## **API Endpoints**
 
-### *Auth APIs*
+### **Auth APIs**
 
 ```js
 /**
@@ -124,7 +136,11 @@ Features for the future: Making a mobile version of the app
 */
 ```
 
-### *User APIs*
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+### **User APIs**
 
 ```js
 /**
@@ -161,7 +177,11 @@ Features for the future: Making a mobile version of the app
 */
 ```
 
-### *Note APIs*
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+### **Note APIs**
 
 ```js
 /**
@@ -198,6 +218,20 @@ Features for the future: Making a mobile version of the app
 */
 ```
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+***
+<!-- ENTITY RELATIONSHIP DIAGRAM -->
+## **Entity Relationship Diagram**
+
+[![Meganote ERD][erd]](https://example.com)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
 ***
 <!-- GETTING STARTED -->
 ## **Getting Started**
@@ -210,6 +244,10 @@ Features for the future: Making a mobile version of the app
     npm -v
     ```
 2. Install Node.js and npm if needed at [https://nodejs.org/en/download](https://nodejs.org/en/download)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
 
 ### **Installation**
 
@@ -226,7 +264,7 @@ Features for the future: Making a mobile version of the app
 3. Create an `.env` file with the following contents
    ```js
    MONGO_URI=your_mongodb_uri
-   PORT=your_preferred_port
+   PORT=your_preferred_port // default: 5000
    NODE_ENV=development
    ACCESS_TOKEN_SECRET=your_access_token_secret
    REFRESH_TOKEN_SECRET=your_refresh_token_secret
@@ -236,7 +274,8 @@ Features for the future: Making a mobile version of the app
    node
    require('crypto').randomBytes(64).toString('hex')
    ```
-5. Replace the default values with your own values for `MONGO_URI`, `PORT`, `ACCESS_TOKEN_SECRET`, and `REFRESH_TOKEN_SECRET` in the `.env` file
+5. Replace the default values with your own values for `PORT` (optional), `MONGO_URI`, `ACCESS_TOKEN_SECRET`, and `REFRESH_TOKEN_SECRET` in the `.env` file
+   
 6. Start the server
    ```sh
    npm start
@@ -255,12 +294,15 @@ Features for the future: Making a mobile version of the app
 3. Create an `.env` file with the following contents
    ```js
    VITE_NODE_ENV=development
+   VITE_API_URL=your_api_url // default: http://localhost:5000
    ```
-4. Build the app
+4. Optional: Replace the value of `VITE_API_URL` with the URL of your deployed API
+   
+5. Build the app
    ```sh
    npm run build
    ```
-5. Run the app
+6. Run the app
    ```sh
    npm run dev
    ```
@@ -283,6 +325,7 @@ Features for the future: Making a mobile version of the app
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [product-screenshot]: public/images/Meganote.png
+[erd]: public/images/Meganote%20ERD%20light.png
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
 [Redux.js]: https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white
