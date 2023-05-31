@@ -24,7 +24,10 @@ const PersistLogin = () => {
   useEffect(() => {
     // useEffect runs twice in Strict Mode
     // React 18 Strict Mode only happens in 'development'
-    if (effectRan.current === true || process.env.NODE_ENV !== "development") {
+    if (
+      effectRan.current === true ||
+      import.meta.env.VITE_NODE_ENV !== "development"
+    ) {
       // React 18 Strict Mode
 
       const verifyRefreshToken = async () => {
