@@ -6,8 +6,7 @@ import { setCredentials } from "../../features/auth/authSlice";
 
 // Use fetchBaseQuery to create a base query that will be used for all of our requests to the baseUrl
 const baseQuery = fetchBaseQuery({
-  // TODO: Set this to the deployed API URL
-  baseUrl: "http://localhost:5000",
+  baseUrl: import.meta.env.VITE_API_URL || "http://localhost:5000",
   // 'include' credentials to send cookies with every request
   credentials: "include",
   // Apply the authorization header to every request we send to the API
